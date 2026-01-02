@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<title>Menstrual health tips + Playlist</title>
+<style>
+body{
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  color:#ebe5e9;
+  margin:0;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  min-height:100vh;
+}
+.container{
+  display:flex;
+  gap:40px;
+  flex-wrap:wrap;
+  justify-content:center;
+  width:100%;
+}
+.content{
+  max-width:520px;
+  background:rgba(31,41,55,0.9);
+  padding:30px;
+  border-radius:15px;
+  box-shadow:0 8px 20px rgba(0,0,0,.5);
+}
+.card{
+  background:#1f2937;
+  margin-top:20px;
+  padding:20px;
+  border-radius:12px;
+  line-height:1.6;
+}
+select,button{
+  padding:10px;
+  margin-top:15px;
+  font-size:16px;
+  border-radius:8px;
+  border:none;
+}
+select{width:100%;}
+button{
+  background:#3b82f6;
+  color:#fff;
+  width:100%;
+  cursor:pointer;
+}
+button:hover{background:#2563eb;}
+
+.playlist{
+  background:rgba(31,41,55,0.9);
+  padding:20px;
+  border-radius:15px;
+  max-width:300px;
+  height:520px;
+  overflow-y:auto;
+  box-shadow:0 8px 20px rgba(0,0,0,.5);
+}
+.playlist h3{
+  margin-top:0;
+  color:#3b82f6;
+  border-bottom:1px solid #f03bf6;
+}
+.playlist-item{
+  padding:10px;
+  margin-bottom:10px;
+  border-radius:8px;
+  background:#111827;
+  cursor:pointer;
+}
+.playlist-item:hover{
+  background:#f63bf6;
+  color:#fff;
+}
+audio{width:100%;margin-top:15px;}
+
+@media(max-width:768px){
+  .container{flex-direction:column;}
+  .playlist{max-width:100%;}
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎀 Menstrual health tips + Playlist</h1>
+
+<div class="container">
+
+<div class="content">
+  <p>Өдөр сонгоно уу:</p>
+  <select id="periodDay">
+    <option value="">-- Сонгох --</option>
+    <option value="1">1-р өдөр</option>
+    <option value="2">2-р өдөр</option>
+    <option value="3">3-р өдөр</option>
+    <option value="4">4-р өдөр</option>
+    <option value="5">5-р өдөр</option>
+  </select>
+
+  <button onclick="showTip()">Үзэх</button>
+  <div class="card" id="tipCard"></div>
+</div>
+
+<div class="playlist">
+  <h3>🎶 Playlist (5)</h3>
+  <div class="playlist-item" onclick="playSong(0)">🔥 Song 1</div>
+  <div class="playlist-item" onclick="playSong(1)">🎵 Song 2</div>
+  <div class="playlist-item" onclick="playSong(2)">🎶 Song 3</div>
+  <div class="playlist-item" onclick="playSong(3)">🎧 Song 4</div>
+  <div class="playlist-item" onclick="playSong(4)">🎼 Song 5</div>
+</div>
+
+</div>
+
+<script>
+const tips={
+"1":"Өдөр 1: Зарим хүмүүс ийм зүйлийг тоглоом инээдэм болгож ярьдаг нь их сонин, тэр их өвдөлт сэтгэл зүйн асуудлыг ойлгох хэрэгтэй гэж үздэг ээ. Өвдөлтийг нь авахгүй ч гэлээ хажууд нь ядаж л хэрэгтэй байгаа зүйлийн авч ирээд халамжлах нь эрэгтэй хүний бага ч гэсэн үүрэг хариуцлага гэж боддог. Хоёр эмэгтэйн хажууд амьдардаг болохоор маш сайн ойлгоно. Чамд ийм байдлаар хэлэх нь соёлтой байх гэж бодоод шууд тулгах биш зөөлөн зөв өнгө аястай байвал W шд. Эхний өдөр сэтгэл зүйгээ тайван байлгаж хэвлий хэсэгтээ бүлээн жин тавьж, тухтай хэвтэж амраарай дулаан мэдрэгдэж байгаа тул эмэгтэйн хүний дааврын ялгарал үүсэж өвдөлтийг намдаах бага ч болов хүчтэй эм болох байх аа буруу ч ярьж байж магадгүй шүү.",
+"2":"Өдөр 2: Хөнгөн дасгал хийж, халуун хоол цай ууж шим тэжээлээ алдаж болохгүй шүү. Нэмэлт витамин ууж, өөрийн биедээ анхаарал хандуулж байгаарай. Витамин Е, витамин В1 нь цус багадалт, ядаргаанд эерэг нөлөө үзүүлдэг шүү.",
+"3":"Өдөр 3: Нуруугаа аль болох дулаан гартай хүнээр бариулаад аваарай, хамгийн их өвддөг хэсэг хэвлий, нуруу шүү дээ. Иллэг хийвэл бага зэрэг намдааж чадах байхаа магадгүй тэр хажууд нь халамжлаад барьж өгөөд иллэг хийн жин тавих хүн ирээдүйд би байж магадгүй шүү дээ хаха эерэг байвал бүх зүйл болно доо бүтнэ дээ тиймээ.",
+"4":"Өдөр 4: Хөгжим сонсох нь сэтгэлийн амар амгаланг мэдрэх гол түлхүүр болдог хажуугаар нь стресс уур бухимдал уйтгар гунигаа мартаад далайн хажууд сууж байгаа мэдрэмжийг төрүүлж гоё орчинд аялуулж байдаг болохоор, зөөлөн аястай дуу хөгжим энэ үед хамгийн ханьтай.",
+"5":"Өдөр 5: Сайн унтаж амрах нь биед чинь дэмтэй шүү, чи хэдийн мэдэж байгаа ч гэсэн, би чамд бага зэрэг ч болов санааг нь амраах дэм өгмөөр санагдсан шүү. Амрах хугацаандаа өөрийгөө анхаарч бай өвдөхгүй, хүчтэй байгаад хичээлдээ ороорой. Өглөө босоод бүлээн ус аль болох тогтмол сайн ууж байгаарай. Тухай үеийн өвдөлтийг давж гарч чаднаа. За ингээд чиний хамгийн сайн сонсогч хүүхдээс нь илгээлээ."
+};
+
+const playlist=[
+"https://res.cloudinary.com/daxaccvdk/video/upload/v1767112484/ejqqg6f9nbir0eswiqvj.mp3",
+"https://res.cloudinary.com/daxaccvdk/video/upload/v1767296724/exkm2dy3xpa6ll231t9p.mp3",
+"https://res.cloudinary.com/daxaccvdk/video/upload/v1767296758/lcwvogabrqudxatwqlnp.mp3",
+"https://res.cloudinary.com/daxaccvdk/video/upload/v1767298229/fgurv1od4ekfvipzwmve.mp3",
+"https://res.cloudinary.com/daxaccvdk/video/upload/v1767298190/n40oo5zaufmsxlbtqel3.mp3"
+];
+
+let audio=null;
+
+function showTip(){
+  const d=document.getElementById("periodDay").value;
+  document.getElementById("tipCard").innerText=d?tips[d]:"Өдөр сонгоно уу";
+}
+function playSong(i){
+  const card=document.getElementById("tipCard");
+  if(!audio){
+    audio=document.createElement("audio");
+    audio.controls=true;
+    audio.autoplay=true;
+    card.appendChild(audio);
+  }
+  audio.src=playlist[i];
+  audio.play();
+}
+</script>
+
+</body>
+</html>
